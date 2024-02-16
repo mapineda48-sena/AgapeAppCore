@@ -1,8 +1,23 @@
+using AgapeApp.Demo;
+using AgapeApp.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// DbContext
+builder.Services.AddAppDbContext(builder.Configuration.GetConnectionString("Database"));
+
+// Storage
+builder.Services.AddStorageService(builder.Configuration.GetConnectionString("Storage"));
+
+// Cache
+builder.Services.AddCacheService(builder.Configuration.GetConnectionString("Cache"));
+
+// Repositories
+builder.Services.AddRepositories();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -25,5 +40,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.InitializeDatabase();
+app.InitializeDemo();
 
 app.Run();

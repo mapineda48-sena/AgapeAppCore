@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_REGISTRY-}agapeappcoreportalpresentacion
     build:
       context: .
-      dockerfile: AgapeAppCore.PortalPresentacion/Dockerfile
+      dockerfile: AgapeAppCore/Dockerfile
     environment:
       ConnectionStrings__Database: "Server=db;Database=Agape;User Id=postgres;Password=mypassword;"
       ConnectionStrings__Storage: "http://minio:minio123@minio:9000"
