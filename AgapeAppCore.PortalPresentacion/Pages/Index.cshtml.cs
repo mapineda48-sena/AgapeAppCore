@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
-namespace WebApplication1.Pages
+namespace AgapeAppCore.PortalPresentacion.Pages
 {
     public class IndexModel : PageModel
     {

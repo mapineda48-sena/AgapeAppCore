@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  agapeappcore.portalpresentacion:
+    image: ${DOCKER_REGISTRY-}agapeappcoreportalpresentacion
+    build:
+      context: .
+      dockerfile: AgapeAppCore.PortalPresentacion/Dockerfile
+    environment:
+      ConnectionStrings__Database: "Server=db;Database=Agape;User Id=postgres;Password=mypassword;"
+      ConnectionStrings__Storage: "http://minio:minio123@minio:9000"
+      ConnectionStrings__Cache: "redis"
+  minio:
+    image: minio/minio:RELEASE.2023-07-07T07-13-57Z
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    command: server --console-address ":9090" /data
+    ports:
+      - 9000:9000
+      - 9090:9090
+  db:
+    image: "postgres:14"
+    environment:
+      POSTGRES_PASSWORD: "mypassword"
+  redis:
+    image: redis

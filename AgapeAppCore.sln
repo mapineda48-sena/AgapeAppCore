@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgapeAppCore.PortalPresentacion", "AgapeAppCore.PortalPresentacion\AgapeAppCore.PortalPresentacion.csproj", "{26E722F7-4016-467A-BB86-60EFF8FDA8D1}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{26163D34-7EC5-4BE9-AA7A-1CB22108B940}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26E722F7-4016-467A-BB86-60EFF8FDA8D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26E722F7-4016-467A-BB86-60EFF8FDA8D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26E722F7-4016-467A-BB86-60EFF8FDA8D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26E722F7-4016-467A-BB86-60EFF8FDA8D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26163D34-7EC5-4BE9-AA7A-1CB22108B940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26163D34-7EC5-4BE9-AA7A-1CB22108B940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26163D34-7EC5-4BE9-AA7A-1CB22108B940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26163D34-7EC5-4BE9-AA7A-1CB22108B940}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46BAFC36-6D2E-440B-BA6F-5E94353ADD7A}
+	EndGlobalSection
+EndGlobal
