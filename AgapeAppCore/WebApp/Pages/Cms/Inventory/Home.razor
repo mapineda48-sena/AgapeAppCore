@@ -1,0 +1,58 @@
+﻿@page "/cms/inventory"
+@attribute [StreamRendering]
+
+@using AgapeApp.Repositories
+@using AgapeAppCore.Repositories
+@using AgapeAppCore.Models.Inventory
+
+@code {
+
+    @inject InventoryRepository inventoryRepository;
+
+    private List<Product>? products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.products = await inventoryRepository.GetProducts();
+    }
+}
+
+
+<PageTitle>Inventory</PageTitle>
+
+<h1>Inventory</h1>
+
+<Menu />
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (products.Count == 0)
+{
+    <p><em>Sin resultados</em></p>
+}
+else
+{
+    <table class="table">
+    <thead>
+        <tr>
+            <th>ProductId</th>
+            <th>FullName</th>
+            <th>Description</th>
+            <th>ImageUrl</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td>@product.FullName</td>
+                    <td>@product.Description</td>
+                    <td>@product.ImageUrl</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

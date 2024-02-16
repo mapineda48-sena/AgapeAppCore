@@ -1,0 +1,65 @@
+<EditForm FormName="product" Model="@product" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="Id">ID:</label>
+        <InputNumber @bind-Value="@product.Id" class="form-control" id="Id" />
+    </div>
+
+    <div class="form-group">
+        <label for="Name">Name:</label>
+        <InputText @bind-Value="@product.Name" class="form-control" id="Name" />
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price:</label>
+        <InputNumber @bind-Value="@product.Price" class="form-control" id="Price" />
+    </div>
+
+    <div class="form-group">
+        <label for="CategoryId">Category:</label>
+        <InputSelect @bind-Value="@product.CategoryId" class="form-control" id="CategoryId">
+            <CategorySelect />
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label for="SubCategoryId">SubCategory:</label>
+        <InputSelect @bind-Value="@product.SubCategoryId" class="form-control" id="SubCategoryId">
+            <SubCategorySelect CategoryId="@product.CategoryId" />
+        </InputSelect>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private Product product { get; set; } = new();
+
+    //protected override void OnInitialized() => product ??= new();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("Form was submitted successfully.");
+        var foo = product;
+        // Aquí iría la lógica para manejar la presentación del formulario,
+        // como enviar los datos a un servidor o a una base de datos.
+    }
+
+    private async Task HandleCategoryChange(ChangeEventArgs e)
+    {
+        product.CategoryId = Convert.ToInt32(e.Value.ToString());
+    }
+
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int CategoryId { get; set; }
+        public int SubCategoryId { get; set; }
+    }
+
+}

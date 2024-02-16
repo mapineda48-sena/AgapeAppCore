@@ -1,5 +1,6 @@
 using AgapeApp.Demo;
 using AgapeApp.Infrastructure.Extensions;
+using AgapeAppCore.WebApp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,9 @@ builder.Services.AddCacheService(builder.Configuration.GetConnectionString("Cach
 builder.Services.AddRepositories();
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+// builder.Services.AddRazorPages();
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
 
 var app = builder.Build();
 
@@ -35,11 +38,14 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseAntiforgery();
+//app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+//app.MapRazorPages();
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
 
 app.InitializeDatabase();
 app.InitializeDemo();

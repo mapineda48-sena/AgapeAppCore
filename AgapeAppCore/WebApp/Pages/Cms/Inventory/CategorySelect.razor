@@ -1,0 +1,30 @@
+@using AgapeApp.Repositories
+@using AgapeAppCore.Repositories
+@using AgapeAppCore.Models.Inventory
+
+@code {
+    [Inject]
+    private InventoryRepository InventoryRepository { get; set; }
+
+    private List<Category>? Categories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (this.Categories is null)
+        {
+            this.Categories = await InventoryRepository.GetCategories();
+        }
+    }
+}
+
+@if (Categories is null)
+{
+    <option>Loading...</option>
+}
+else
+{
+    foreach (var category in Categories)
+    {
+        <option value="@category.CategoryId">@category.FullName</option>
+    }
+}

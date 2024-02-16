@@ -1,0 +1,51 @@
+@using AgapeApp.Repositories
+@using AgapeAppCore.Repositories
+@using AgapeAppCore.Models.Inventory
+
+@code {
+    private int _currentCategoryId;
+    [Parameter]
+    public int CategoryId
+    {
+        get => this._currentCategoryId; set
+        {
+            this._currentCategoryId = value;
+        }
+    }
+
+    [Inject]
+    private InventoryRepository InventoryRepository { get; set; }
+
+    private List<SubCategory>? SubCategories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadSubCategories();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (_currentCategoryId != CategoryId)
+        {
+            _currentCategoryId = CategoryId;
+            await LoadSubCategories();
+        }
+    }
+
+    public async Task LoadSubCategories(int? _categoryId = null)
+    {
+        SubCategories = await InventoryRepository.GetSubCategories(_categoryId ?? CategoryId);
+    }
+}
+
+@if (SubCategories is null)
+{
+    <option>Loading...</option>
+}
+else
+{
+    foreach (var subCategory in SubCategories)
+    {
+        <option value="@subCategory.SubCategoryId">@subCategory.FullName</option>
+    }
+}
